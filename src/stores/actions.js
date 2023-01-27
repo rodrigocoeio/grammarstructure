@@ -13,7 +13,7 @@ export default {
     this.game.started = true;
     this.game.opened = false;
     this.game.cardIndex = 0;
-    this.game.itemsOpened = {};
+    this.game.itemsPlayed = [];
     this.game.cardPlayed = false;
   },
 
@@ -43,7 +43,7 @@ export default {
       console.log("Next Card");
 
       this.game.cardIndex++;
-      this.game.itemsOpened = {};
+      this.game.itemsPlayed = [];
       this.game.cardPlayed = false;
     }
   },
@@ -53,7 +53,7 @@ export default {
       console.log("Previous Card");
 
       this.game.cardIndex--;
-      this.game.itemsOpened = {};
+      this.game.itemsPlayed = [];
       this.game.cardPlayed = false;
     }
   },
