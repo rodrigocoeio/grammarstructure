@@ -1,0 +1,15 @@
+html,
+body {
+  text-align: center;
+  height: 100%;
+}
+
+#app {
+  text-align: center;
+  height: 100%;
+}
+
+content {
+  display: block;
+  height: 100%;
+}
