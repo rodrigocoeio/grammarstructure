@@ -73,7 +73,7 @@ export default {
 .Items {
     max-width: 90%;
     margin: 30px;
-    margin-left: 100px;
+    margin-left: 150px;
 }
 .Item {
     max-width: 200px;
