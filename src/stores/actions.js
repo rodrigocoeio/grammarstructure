@@ -73,6 +73,10 @@ export default {
     const audio = playAudio(audioFile);
     audio.onended = function () {
       store.game.itemsPlayed.push(item.audio);
+
+      if(store.isAllItemsPlayed){
+        playAudio('/audios/right.mp3');
+      }
     };
   },
 

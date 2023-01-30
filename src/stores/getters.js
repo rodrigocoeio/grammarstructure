@@ -19,11 +19,27 @@ export default {
       : false;
   },
 
+  cardItems() {
+    return this.card.items;
+  },
+
   image() {
     return this.card.image;
   },
 
   cardsNumber() {
     return this.currentCategory ? this.currentCategory.cards.length : 0;
-  }
+  },
+
+  isAllItemsPlayed() {
+    const store = this;
+    let allPlayed = true;
+
+    this.cardItems.forEach((item) => {
+      if(!store.game.itemsPlayed.includes(item.audio))
+      allPlayed = false;
+    });
+
+    return allPlayed;
+  },
 };
