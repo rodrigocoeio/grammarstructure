@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a id="logo" class="navbar-brand">
-                <img src="images/grammarstructure-logo.png" width="36" />
+                <img src="/images/grammarstructure-logo.png" width="36" />
             </a>
 
             <!-- Navbar Toogler -->
@@ -11,7 +11,7 @@
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <a class="navbar-brand" href="#">
-                    <img src="images/grammarstructure-logo.png" width="36" />
+                    <img src="/images/grammarstructure-logo.png" width="36" />
                 </a>
             </button>
             <!-- Navbar -->

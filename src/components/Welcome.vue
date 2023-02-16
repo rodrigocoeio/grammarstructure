@@ -1,6 +1,6 @@
 <template>
   <main>
-    <img src="images/grammarstructure.png" class="Logo">
+    <img src="/images/grammarstructure.png" class="Logo">
 
     <br><br>
 
