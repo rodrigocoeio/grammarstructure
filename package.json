@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node readcards.js && vite",
-    "build": "vite build",
+    "build": "node readcards.js && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
