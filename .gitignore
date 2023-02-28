@@ -1,3 +1,6 @@
+/src/stores/categories.json
+/public/cards/*
+
 # Logs
 logs
 *.log
