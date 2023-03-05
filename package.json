@@ -6,7 +6,8 @@
     "dev": "node readcards.js && vite",
     "build": "node readcards.js && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "readcards": "node readcards.js"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
