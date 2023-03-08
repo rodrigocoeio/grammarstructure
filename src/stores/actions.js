@@ -5,8 +5,7 @@ export default {
       !this.currentCategory.cards ||
       this.currentCategory.cards.length === 0
     ) {
-      alert("Choose a Category or Subcategory");
-      $("#categoryField").trigger("focus");
+      this.game.pleaseSelectCategory = true;
       return false;
     }
 
@@ -15,37 +14,42 @@ export default {
     this.game.cardIndex = 0;
     this.game.itemsPlayed = [];
     this.game.cardPlayed = false;
+    this.game.category.cards = this.shuffleCards(this.game.category.cards);
   },
 
   quitGame() {
     this.game.started = false;
-    this.game.category = false;
   },
-  
+
   async loadCategories() {
     try {
-      const categoriesJson = await fetch('/categories.json');
+      const categoriesJson = await fetch("/categories.json");
       this.categories = await categoriesJson.json();
-    }
-    catch(e) {
+    } catch (e) {
       //console.error('Failed loading categories.json!');
-    }    
+    }
   },
 
   selectCategory(category) {
     if (category && category.cards) {
-      switch (this.game.cardSorting) {
-        case "alpha":
-          category.cards = sortByKey(category.cards, "name", "asc");
-          break;
-
-        case "shuffle":
-          category.cards = shuffleArray(category.cards);
-          break;
-      }
-
+      category.cards = this.shuffleCards(category.cards);
+      this.game.pleaseSelectCategory = false;
       this.game.category = category;
     }
+  },
+
+  shuffleCards(cards) {
+    switch (this.game.cardSorting) {
+      case "alpha":
+        cards = sortByKey(cards, "name", "asc");
+        break;
+
+      case "shuffle":
+        cards = shuffleArray(cards);
+        break;
+    }
+
+    return cards;
   },
 
   nextCard() {
@@ -74,8 +78,7 @@ export default {
       this.game.audio = false;
     }
 
-    if(!this.card.items.includes(item))
-      return false;
+    if (!this.card.items.includes(item)) return false;
 
     const store = this;
     const audioFile = "/cards/" + this.currentCategory.name + "/" + item.audio;
@@ -84,8 +87,8 @@ export default {
     audio.onended = function () {
       store.game.itemsPlayed.push(item.audio);
 
-      if(store.isAllItemsPlayed){
-        playAudio('/audios/right.mp3');
+      if (store.isAllItemsPlayed) {
+        playAudio("/audios/right.mp3");
       }
     };
   },
@@ -114,5 +117,5 @@ export default {
       this.game.audio.pause();
       this.game.audio = false;
     }
-  }
+  },
 };

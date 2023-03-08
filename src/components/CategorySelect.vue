@@ -1,29 +1,35 @@
 <template>
-    <select id="categoryField" ref="select" class="form form-select" v-model="categoryName" @change="selectCategory">
-        <option value="0">{{ placeholder }}</option>
-        <option v-for="category, index in categories" :value="index">{{ category.name }}</option>
+    <select id="categoryField" ref="select" :class="[pleaseSelectCategory ? 'PleaseSelectCategory' : '']"
+        v-model="categoryName" @change="selectCategory">
+        <option value="0" disabled>{{ placeholder }}</option>
+        <option v-if="category" value="-1">..</option>
+        <option v-for="category, index in     computedCategories" :value="index">
+            {{ category.name }}
+            <span v-if="category.categories && Object.keys(category.categories).length > 0">>></span>
+        </option>
     </select>
-
-    <category-select v-if="hasSubCategories" :category="currentCategory" :categories="currentCategory.categories">
-    </category-select>
 </template>
 
 <script>
 import store from "$/store.js";
-import CategorySelect from "./CategorySelect.vue";
 
 export default {
-    props: ['category', 'categories'],
+    props: ['categories'],
 
     data() {
         return {
+            category: store.game.category,
             categoryName: "0"
         }
     },
 
     computed: {
+        pleaseSelectCategory() {
+            return store.game.pleaseSelectCategory;
+        },
+
         placeholder() {
-            return !this.category ? "Choose a Category" : "Choose a Sub-Category";
+            return !this.category ? "Choose a Category" : this.category.name;
         },
 
         hasSubCategories() {
@@ -31,7 +37,14 @@ export default {
         },
 
         currentCategory() {
-            return this.categories[this.categoryName];
+            return this.computedCategories[this.categoryName];
+        },
+
+        computedCategories() {
+            if (this.category)
+                return this.category.categories;
+
+            return this.categories;
         }
     },
 
@@ -39,12 +52,31 @@ export default {
         if (!store.game.category)
             this.selectCategory();
 
-        $(this.$refs.select).trigger("focus");
+        this.$refs.select.focus();
     },
 
     methods: {
         selectCategory() {
-            store.selectCategory(this.currentCategory);
+            if (this.categoryName === "-1") {
+                this.category = false;
+                this.categoryName = "0";
+                store.game.category = false;
+                return false;
+            }
+
+            const currentCategory = this.currentCategory;
+            if (currentCategory) {
+                if (Object.keys(currentCategory.categories).length > 0) {
+                    this.category = this.currentCategory;
+                    this.categoryName = "0";
+                }
+                if (Object.keys(currentCategory.cards).length > 0) {
+                    store.selectCategory(currentCategory);
+                } else {
+                    store.game.category = false;
+                }
+            }
+
         }
     }
 }
@@ -52,8 +84,24 @@ export default {
 
 <style scoped>
 select {
-    max-width: 200px;
-    margin: auto;
+    display: block;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 24px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0 auto;
     margin-bottom: 15px;
+    cursor: pointer;
+    border: 3px solid black;
+}
+
+select:hover {
+    background-color: chartreuse;
+    text-shadow: white 3px 0 10px;
+    box-shadow: 3px 3px gray;
+}
+
+.PleaseSelectCategory {
+    border: 3px solid red;
 }
 </style>
