@@ -6,16 +6,10 @@ import router from './router'
 
 import './assets/main.css'
 
-// Import our custom CSS
-import "./assets/styles.scss";
-
 import "./scripts.js";
 
 import jQuery from "jquery";
 window.$ = jQuery;
-
-// Import all of Bootstrap's JS
-import * as bootstrap from "bootstrap";
 
 const app = createApp(App)
 

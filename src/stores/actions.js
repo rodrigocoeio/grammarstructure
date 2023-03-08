@@ -18,6 +18,7 @@ export default {
   },
 
   quitGame() {
+    this.stopCard();
     this.game.started = false;
   },
 
@@ -73,10 +74,7 @@ export default {
   },
 
   playItem(item) {
-    if (this.game.audio) {
-      this.game.audio.pause();
-      this.game.audio = false;
-    }
+    this.stopCard();
 
     if (!this.card.items.includes(item)) return false;
 

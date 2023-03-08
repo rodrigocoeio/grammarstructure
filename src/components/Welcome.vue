@@ -58,7 +58,6 @@ export default {
 <style scoped>
 main {
   height: 100%;
-  padding: 15px;
   display: flex;
   place-content: center;
   justify-items: center;
