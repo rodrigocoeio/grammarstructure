@@ -154,6 +154,10 @@ button:not([disabled]):hover {
     box-shadow: 3px 3px gray;
 }
 
+button * {
+    vertical-align: middle;
+}
+
 .PreviousCardButton:not([disabled]):hover {
     background-color: yellow;
 }
