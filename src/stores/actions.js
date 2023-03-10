@@ -24,7 +24,7 @@ export default {
 
   async loadCategories() {
     try {
-      const categoriesJson = await fetch("/categories.json");
+      const categoriesJson = await fetch("/cards/categories.json");
       this.categories = await categoriesJson.json();
     } catch (e) {
       //console.error('Failed loading categories.json!');
